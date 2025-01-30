@@ -1,4 +1,5 @@
 import {useState} from 'react';
+import BlogList from './BlogList';
 const  Home = () => {
     const [blogs, setBlogs] = useState([
         {title: 'My new website', body: 'lorem ipsum...', author: 'mario', id: 1},
@@ -7,21 +8,21 @@ const  Home = () => {
     ]);
     //
    // let name = 'katniss';
+   //props are way to pass content from parent to child components
    const [name, setName] = useState('katniss');
    const [age, setAge] = useState(16);
     const handleClickAgain = ()  => { 
         setName('peeta');
         setAge(17);
     }
+    const handleDelete = (id) => {  
+        const newBlogs = blogs.filter(blog => blog.id !== id);
+        setBlogs(newBlogs);
+    }
     return ( 
         <div className="home">
-            {blogs.map((blog) => (
-                <div className="blog-preview" key={blog.id}>
-                    <h2>{blog.title}</h2>
-                    <p>Written by {blog.author}</p>
-                </div>
-
-            ))}
+            <BlogList blogs={blogs} title = "All Blogs" handleDelete={handleDelete}/>
+            <BlogList blogs={blogs.filter((blog) => blog.author === 'mario')} title = "Tess's blogs"/>
             <h2>Home Page</h2>
             <p>{name} is {age} years old. </p>
     
