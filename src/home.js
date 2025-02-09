@@ -1,4 +1,4 @@
-import {useState} from 'react';
+import {useState, useEffect } from 'react';
 import BlogList from './BlogList';
 const  Home = () => {
     const [blogs, setBlogs] = useState([
@@ -6,10 +6,11 @@ const  Home = () => {
         {title: 'Welcome party!', body: 'lorem ipsum...', author: 'yoshi', id: 2},
         {title: 'Web dev top tips', body: 'lorem ipsum...', author: 'mario', id: 3}
     ]);
+
+    const [name, setName] = useState('katniss');
     //
    // let name = 'katniss';
    //props are way to pass content from parent to child components
-   const [name, setName] = useState('katniss');
    const [age, setAge] = useState(16);
     const handleClickAgain = ()  => { 
         setName('peeta');
@@ -19,6 +20,10 @@ const  Home = () => {
         const newBlogs = blogs.filter(blog => blog.id !== id);
         setBlogs(newBlogs);
     }
+    useEffect(() => {
+            console.log('use effect ran');
+            console.log(name);
+    }, [name]);
     return ( 
         <div className="home">
             <BlogList blogs={blogs} title = "All Blogs" handleDelete={handleDelete}/>
@@ -28,6 +33,9 @@ const  Home = () => {
     
             <button onClick={() =>  handleClickAgain('mario') }> Click Me again</button>
 
+        <button onClick={() =>  setName('Katniss') }> change name</button>
+        
+        <p>{name}</p>
         </div>
      );
 }
