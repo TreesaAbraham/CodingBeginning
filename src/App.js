@@ -23,3 +23,8 @@ function App() {
 //this is called jsx, create style templates, babble will convert this to html
 //I will delete the template and create my own
 export default App;
+
+//Notes for JSON server
+// /blogs/{id} - GET - get a single blog
+// /blogs - POST - add a new blog
+// /blogs/{id} - DELETE - delete a blog
