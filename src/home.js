@@ -1,10 +1,10 @@
 import {useState, useEffect } from 'react';
 import BlogList from './BlogList';
+import useFetch from './useFetch';
 const  Home = () => {
-    const [blogs, setBlogs] = useState(null);
-
     const [name, setName] = useState('katniss');
-    const [isPending, setISPending] =useState(true);
+    const {data:blogs, isPending, error} = useFetch('http://localhost:8000/blogs');
+    
     //
    // let name = 'katniss';
    //props are way to pass content from parent to child components
@@ -14,23 +14,12 @@ const  Home = () => {
         setAge(17);
     }
     
-    useEffect(() => {
-        setTimeout(() => {
-            fetch('http://localhost:8000/blogs')
-            .then(res => {
-                return res.json();
-         })
-         .then(data => {
-            setBlogs(data);
-            setISPending(false);
-        });
-        }, 1000);
-    }, []);
+   
     return ( 
         <div className="home">
            {blogs && <BlogList blogs={blogs} title = "All Blogs"/>}
            {isPending && <div> Loading...</div>}
-            
+            {error && <div>{error}</div>}
             <h2>Home Page</h2>
         
             <p>{name} is {age} years old. </p>
