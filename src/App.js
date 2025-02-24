@@ -1,6 +1,9 @@
 import './index.css'
 import Navbar from './navbar';
 import Home from './home';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import Create from './create';
+
 
 
 function App() {
@@ -10,14 +13,23 @@ function App() {
   //numbers and strings are allowed, persons and objects aren't
   //create a variable and assign it to a string, and refer to it later on
   return (
-    <div className="App">
+    <Router>
+      <div className="App">
       <Navbar />
       <div className="content">
-         
-        <Home />
+         <Switch>
+           <Route exact path="/">
+             <Home />
+           </Route>
+           <Route path="/create">
+             <Create />
+           </Route>
+         </Switch>
       </div>
 
     </div>
+    </Router>
+    
   );
 }
 //this is called jsx, create style templates, babble will convert this to html
