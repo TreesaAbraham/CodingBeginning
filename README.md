@@ -8,3 +8,6 @@ git push origin main
 
 To run json file
 npx json-server --watch data/db.json --port 8000
+
+route parameters: pass dynamcic values, still renders the same page/component.
+/blogs/123
