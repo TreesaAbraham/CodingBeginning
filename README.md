@@ -1,5 +1,4 @@
 # CodingBeginning
-Why did I choose that name. 
 git add .
 git commit -m 'message'
 git push origin main
@@ -10,4 +9,4 @@ To run json file
 npx json-server --watch data/db.json --port 8000
 
 route parameters: pass dynamcic values, still renders the same page/component.
-/blogs/123
+/blogs/
