@@ -92,7 +92,7 @@ div {
 .create button {
   background: #167d71;
   color: #fff;
-  border: 2;
+  border: 0;
   padding: 8px;
   border-radius: 8px;
   cursor: pointer;
