@@ -4,13 +4,11 @@ import Home from './home';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Create from './create';
 import BlogsDetails from './BlogsDetails';
+import NotFound from './notFound';
 
 
 
 function App() {
-  const title = 'Welcome to the new blog';
-  const likes = 50;
-  const link = "http://www.google.com";
   //numbers and strings are allowed, persons and objects aren't
   //create a variable and assign it to a string, and refer to it later on
   return (
@@ -27,6 +25,9 @@ function App() {
            </Route>
            <Route path="/blogs/:id">
            <BlogsDetails />
+           </Route>
+           <Route path = "*">
+            <NotFound />
            </Route>
          </Switch>
       </div>
