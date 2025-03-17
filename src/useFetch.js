@@ -1,38 +1,29 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect } from "react";
+import supabase from "./supabaseClient";
 
-const useFetch = (url) => {
+const useFetch = (table) => {
   const [data, setData] = useState(null);
   const [isPending, setIsPending] = useState(true);
   const [error, setError] = useState(null);
 
-  const fetchData = useCallback(() => {
-    const abortCont = new AbortController();
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        let { data, error } = await supabase.from(table).select("*");
 
-    fetch(url, { signal: abortCont.signal })
-      .then(res => {
-        if (!res.ok) {
-          throw Error(`Error ${res.status}: ${res.statusText}`);
-        }
-        return res.json();
-      })
-      .then(data => {
+        if (error) throw error;
+
         setData(data);
         setIsPending(false);
         setError(null);
-      })
-      .catch(err => {
-        if (err.name !== 'AbortError') {
-          setIsPending(false);
-          setError(err.message);
-        }
-      });
+      } catch (err) {
+        setIsPending(false);
+        setError(err.message);
+      }
+    };
 
-    return () => abortCont.abort();
-  }, [url]);
-
-  useEffect(() => {
     fetchData();
-  }, [fetchData]);
+  }, [table]);
 
   return { data, isPending, error };
 };
