@@ -1,16 +1,10 @@
 {
   "blogs": [
     {
-      "title": "Blog 2",
-      "body": "Why do we use it? It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.",
-      "author": "Jane Doe",
-      "id": "2"
-    },
-    {
-      "id": "26b1",
-      "title": "Coding",
-      "body": "I hate bugs, and life",
-      "author": "Meeeeee"
+      "id": "b3a0",
+      "title": "coding",
+      "body": "an analysis",
+      "author": "tree"
     }
   ]
 }

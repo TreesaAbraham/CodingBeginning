@@ -1,37 +1,35 @@
-import {useState, useEffect } from 'react';
-import BlogList from './BlogList';
-import useFetch from './useFetch';
-const  Home = () => {
-    const [name, setName] = useState('katniss');
-    const {data:blogs, isPending, error} = useFetch('http://localhost:8000/blogs');
-    
-    //
-   // let name = 'katniss';
-   //props are way to pass content from parent to child components
-   const [age, setAge] = useState(16);
-    const handleClickAgain = ()  => { 
-        setName('peeta');
-        setAge(17);
-    }
-    
-   
-    return ( 
-        <div className="home">
-           {blogs && <BlogList blogs={blogs} title = "All Blogs"/>}
-           {isPending && <div> Loading...</div>}
-            {error && <div>{error}</div>}
-            <h2>Home Page</h2>
-        
-            <p>{name} is {age} years old. </p>
-    
-            <button onClick={() =>  handleClickAgain('mario') }> Click Me again</button>
+/*display of homepage */
+import { useState } from "react";
+import BlogList from "./BlogList";
+import useFetch from "./useFetch";
 
-        <button onClick={() =>  setName('Katniss') }> change name</button>
+const Home = () => {
+  const [name, setName] = useState("katniss");
+  const [age, setAge] = useState(16);
+  const { data: blogs, isPending, error } = useFetch("http://localhost:8000/blogs");
 
-        
-        <p>{name}</p>
-        </div>
-     );
-}
- 
+  const handleClickAgain = () => {
+    setName("peeta");
+    setAge(17);
+  };
+
+  return (
+    <div className="home">
+      <h2>Home Page</h2>
+
+      {isPending && <div>Loading...</div>}
+      {error && <div>{error}</div>}
+      {blogs && blogs.length === 0 && <p>No blogs available.</p>}
+      {blogs && <BlogList blogs={blogs} title="All Blogs" />}
+
+      <p>{name} is {age} years old.</p>
+      
+      <button onClick={handleClickAgain}>Click Me Again</button>
+      <button onClick={() => setName("Katniss")}>Change Name</button>
+
+      <p>{name}</p>
+    </div>
+  );
+};
+
 export default Home;

@@ -1,3 +1,4 @@
+/* this page helps to create a new blog */
 import {useState} from 'react';
 import {useHistory} from 'react-router-dom';
 
@@ -17,11 +18,22 @@ const  Create = () => {
             method: 'POST',
             headers: {"Content-Type": "application/json"},
             body: JSON.stringify(blog)
-        }).then(() => {
+        })
+        .then((res) => {
+            if (!res.ok) {
+                throw Error('Could not add the blog');
+            }
+            return res.json();
+        })
+        .then(() => {
             console.log('new blog added');
             setIsPending(false);
             history.push('/');
         })
+        .catch((err) => {
+            console.error('Error:', err);
+        }
+        )
 
 
 
@@ -57,9 +69,9 @@ const  Create = () => {
 
                { !isPending &&  <button>Add Blog</button>}
                { isPending &&  <button>Adding</button>}
-                <p>{title}</p>
-                <p>{body}</p>
-                <p>{author}</p>
+                <p>{title}
+                {body}
+                {author}</p>
             </form>
         </div>
     );
