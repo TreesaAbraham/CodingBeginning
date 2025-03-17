@@ -7,22 +7,24 @@ const useFetch = (table) => {
   const [error, setError] = useState(null);
 
   useEffect(() => {
+    console.log("Fetching data from", table);
     const fetchData = async () => {
       try {
-        let { data, error } = await supabase.from(table).select("*");
+        let { data, error } = await supabase.from(table).select("id, title, content, author");
 
         if (error) throw error;
 
-        setData(data);
+        setData(data || []); // Ensure it's always an array
         setIsPending(false);
-        setError(null);
       } catch (err) {
-        setIsPending(false);
         setError(err.message);
+        setIsPending(false);
       }
     };
 
+
     fetchData();
+    
   }, [table]);
 
   return { data, isPending, error };
