@@ -1,5 +1,6 @@
 /* this page helps to display the list of blogs in the home page */
 import { Link } from "react-router-dom";
+import useFetch from "./useFetch";
 
 const BlogList = ({ blogs, title }) => {
   return (

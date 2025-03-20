@@ -4,6 +4,7 @@ import Home from './home';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Create from './create';
 import BlogsDetails from './BlogsDetails';
+import BlogList from './BlogList';
 import NotFound from './notFound';
 
 
